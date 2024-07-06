@@ -42,6 +42,9 @@ String::String(const String &rhs){
 String& String::operator=(const String &rhs){
 	//检查自赋值
 	if(this != &rhs){
+		if(_pstr){
+			delete [] _pstr;
+		}
 		_pstr = new char[strlen(rhs._pstr) + 1]();
 		strcpy(_pstr,rhs._pstr);
 	}
@@ -63,6 +66,7 @@ int main()
 	String str1;
 	str1.print();
 
+	//yingshi zhuanhuan:
 	String str2 = "Hello,world";
 	String str3("wangdao");
 	

@@ -165,10 +165,16 @@ int example_3()
 	const char* title = titleElement->GetText();
 	printf( "Name of play (1): %s\n", title );
 
+printf("-------------heerreee-----------------------\n");
+printf("------------------------------------\n");
+printf("------------------------------------\n");
 	XMLText* textNode = titleElement->FirstChild()->ToText();
 	title = textNode->Value();
 	printf( "Name of play (2): %s\n", title );
 
+printf("-------------heerreee-----------------------\n");
+printf("------------------------------------\n");
+printf("------------------------------------\n");
 	return doc.ErrorID();
 }
 /** @page Example_3 Get information out of XML

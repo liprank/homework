@@ -1,0 +1,69 @@
+int example_3()
+{
+	XMLDocument doc;
+	doc.LoadFile( "resources/coolshell.xml" );
+
+	// 定义XML字符串字面量
+	static const char* xml =
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+	"<channel>"
+	"<item>"
+	"<title>ETCD的内存问题</title>"
+	"<link>https://coolshell.cn/articles/22242.html</link>"
+	"</item>"
+	"</channel>";
+
+	//doc.Parse("resources/coolshell.xml" );
+	//doc.Parse();
+cout << "-------1---" << endl;
+	XMLNode* FirstChild = doc.FirstChild();
+
+cout << "-------2---" << endl;
+
+	if(FirstChild == nullptr) cout << "null" << endl;
+	XMLDeclaration* DeNode0 = FirstChild->ToDeclaration();
+	if(DeNode0 == nullptr) cout << "DeNode0 is null" << endl;
+
+cout << "-------3---" << endl;
+	const char* title0 = DeNode0->Value();
+	printf( "parent title0: %s\n", title0 );
+
+	//XMLElement* titleElement = doc.FirstChildElement( "channel" )->FirstChildElement("title");
+	//XMLText* textNode = titleElement->FirstChild()->ToText();
+
+	//const char* title = textNode->Value();
+	//printf( "title: %s\n", title );
+
+	XMLNode* declaration = doc.FirstChild();
+cout << "-------2---" << endl;
+	XMLNode* rss = declaration->NextSibling(); 
+	XMLElement* rssElement = rss->ToElement();
+	
+cout << "-------3---" << endl;
+	XMLElement* titleElement = rssElement->FirstChildElement("channel")->FirstChildElement("item")->FirstChildElement("title");
+	XMLElement* linkElement = rssElement->FirstChildElement("channel")->FirstChildElement("item")->FirstChildElement("link");
+	XMLElement* descriptionElement = rssElement->FirstChildElement("channel")->FirstChildElement("item")->FirstChildElement("description");
+	XMLElement* contentElement = rssElement->FirstChildElement("channel")->FirstChildElement("item")->FirstChildElement("content");
+
+cout << "-------4---" << endl;
+	XMLText* textNode0 = titleElement->FirstChild()->ToText();
+	XMLText* textNode1 = linkElement->FirstChild()->ToText();
+	XMLText* textNode2 = descriptionElement->FirstChild()->ToText();
+	XMLText* textNode3 = contentElement->FirstChild()->ToText();
+	
+cout << "-------5---" << endl;
+	const char* title = textNode0->Value();
+	const char* link = textNode1->Value();
+	const char* description = textNode2->Value();
+	const char* content = textNode3->Value();
+
+	printf( "title: %s\n", title );
+	printf( "link: %s\n", link );
+	printf( "description: %s\n", description );
+	printf( "content: %s\n", content );
+
+cout << "-------3---" << endl;
+
+	return doc.ErrorID();
+}
+

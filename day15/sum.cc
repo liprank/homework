@@ -3,15 +3,15 @@
 using std::cout;
 using std::endl;
 
-template <class T,class... Args>
-T sum(T x,Args... args){
-	return x + sum<Args...>(args...); 	
-}
-
-template <class T>
-T sum(){
+double sum(){
 	return 0;
 }
+
+template <class T,class... Args>
+double sum(T x,Args... args){
+	return x + sum(args...); 	
+}
+
 
 void test0(){
 	cout << sum(1,3,4,5,6) << endl;

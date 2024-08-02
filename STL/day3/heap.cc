@@ -82,6 +82,7 @@ void HeapSort<T,Compare>::sort(){
 void test(){
 	int arr[10] = {11,4,55,6,33,2,10,7,9,1};
 	HeapSort<int> h1(arr,10);
+	//h1.sort();
 }
 
 int main(){

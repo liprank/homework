@@ -66,7 +66,7 @@ bool operator<(const Point& lhs,const Point& rhs){
 	return false;
 }
 
-//version2: 
+//version2: function object
 struct ComparePoint{
 	bool operator()(const Point& lhs,const Point& rhs) const{
 		cout << "compare point" << endl;

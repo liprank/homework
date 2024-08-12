@@ -84,3 +84,51 @@ string TcpConnection::toString()
 
     return oss.str();
 }
+
+void TcpConnection::NewConnectionCB(TcpCB && cb){
+	_onNewConnectionCB = std::move(cb);
+}
+
+void TcpConnection::MessageCB(TcpCB && cb){
+	_onMessageCB = std::move(cb);
+}
+
+void TcpConnection::CloseCB(TcpCB && cb){
+	_onCloseCB = std::move(cb);
+}
+
+void TcpConnection::NewConnectionHandle(){
+	if(_onNewConnectionCB){
+		_onNewConnectionCB(shared_from_this());
+	}else{
+		cout << "NewConnectionCB is nullptr" << endl;
+	}
+}
+
+void TcpConnection::MessageHandle(){
+	if(_onMessageCB){
+		_onMessageCB(shared_from_this());
+	}else{
+		cout << "MessageCB is nullptr" << endl;
+	}
+}
+
+void TcpConnection::CloseHandle(){
+	if(_onCloseCB){
+		_onCloseCB(shared_from_this());
+	}else{
+		cout << "CloseCB" << endl;
+	}
+}
+
+bool TcpConnection::isClosed() const{
+	char buf[10] = {0};
+	int ret = ::recv(_sock.getFd(),buf,sizeof(buf),MSG_PEEK);
+
+	return 0 == ret;
+}
+
+
+
+
+

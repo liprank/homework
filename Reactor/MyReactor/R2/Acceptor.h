@@ -10,13 +10,6 @@
 
 class Acceptor {
 public: 
-    Socket _sock;
-    InetAddress _addr;
-    
-int accept();
-    
-void ready();
-    
 /**
  * @param ip
  * @param port
@@ -25,14 +18,23 @@ Acceptor(const string & ip, unsigned short port);
 
 ~Acceptor();
     
-void setReuseAddr();
+int accept();
     
-void setReusePort();
+void ready();
+
+int getFd();
 private: 
-    
+    Socket _sock;
+    InetAddress _addr;
+
+private:
 void bind();
     
 void listen();
+
+void setReuseAddr();
+    
+void setReusePort();
 };
 
 #endif //_ACCEPTOR_H

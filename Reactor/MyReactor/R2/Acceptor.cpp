@@ -92,3 +92,7 @@ void Acceptor::listen() {
 		return;
 	}
 }
+
+int Acceptor::getFd(){
+	return _sock.getFd();
+}
